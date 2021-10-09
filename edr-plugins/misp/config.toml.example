@@ -1,0 +1,21 @@
+[misp]
+
+# MISP server URL
+url = "https://your.misp.server:8443"
+
+# API key to access MISP server
+key = "ChangeMe"
+
+# TLS verification
+ssl = true
+
+[whids]
+
+# WHIDS manager URL
+url = "https://whids.manager.local:8001"
+
+# API key to access WHIDS manager
+key = "ChangeMe"
+
+# TLS verification
+verify = true

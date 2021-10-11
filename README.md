@@ -9,5 +9,5 @@ pywhids is a library to access and manage WHIDS from Python
 The initial goal of this project is to provide working example plugins
 to show how to integrate WHIDS with other open source tools.
 
-Please find those in [./edr-plugin](./edr-plugin)
+Please find those in [./edr-plugins](./edr-plugins)
 

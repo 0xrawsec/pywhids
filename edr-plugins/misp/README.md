@@ -24,7 +24,12 @@ crucial informations such as (running processes, modules/drivers loaded, etc.).
 This plugin aims at pushing those reports (and related artifacts) to MISP in the
 objective to be shared and analysed by other parties.
 
-**How it works:**
+**How it works:** WHIDS manager exposes an API to query artifacts uploaded
+by the endpoints. This plugin makes regular calls to this API in order to 
+find new artifacts uploaded with IR reports. Whenever a new report is found, 
+the plugin creates a new report object in MISP. 
+
+**NB:** An event is created per day and then reports objects are appended to the event.
 
 **Example:**
 ```bash
@@ -39,7 +44,7 @@ objective to be shared and analysed by other parties.
 This plugin takes advantage of the event's streams exposed by an EDR manager to
 update MISP sightings.
 
-**How it works:** the streams are provided through websockets and are streaming in real
+**How it works:** streams are provided through websockets and are streaming in real
 time the events received by the EDR manager. Multiple clients might subscribe to a stream
 and will receive the same events.
 
@@ -50,7 +55,7 @@ in a minute, this will count as only one sighting. By extension, if 5 hosts reso
 in a minute, this will count as 5 sightings. The refresh time of a sighting is configurable 
 with `--cache-ttl` command line option.
 
-NB: only sightings with IDS flag set will be updated
+**NB:** only attributes with **IDS flag** will see there sightings updated
 
 **Example:**
 

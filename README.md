@@ -2,7 +2,7 @@
 
 # Library and tools to interface with WHIDS
 
-pywhids is a library to access and manage WHIDS from Python
+pywhids is a library to access and manage [WHIDS](https://github.com/0xrawsec/whids) from Python
 
 # EDR plugins
 

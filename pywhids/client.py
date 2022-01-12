@@ -9,6 +9,7 @@ from .exceptions import *
 from .artifacts import *
 from .event import Event
 from .endpoint import Endpoint
+from .ioc import IOC
 
 
 def api_timestamp(t: datetime):
@@ -61,3 +62,32 @@ class Client(requests.Session):
         for uuid in d:
             for art_data in d[uuid]:
                 yield EventArtifacts(self, uuid, art_data)
+    
+    def get_iocs(self):
+        route = self._api_route("/iocs")
+
+        params = {}
+
+        d = self._request("GET", route, params=params)
+        for ioc_data in d:
+            yield IOC(**ioc_data)    
+
+    def add_iocs(self, iocs: typing.Union[IOC, typing.Iterator[IOC]]):
+        route = self._api_route("/iocs")
+
+        if isinstance(iocs, IOC):
+            iocs = [iocs]
+
+        iocs = list(map(lambda x: x.to_dict(), iocs))
+
+        self._request("POST", route, json=iocs)
+
+    def delete_iocs(self, iocs: typing.Union[IOC, typing.Iterator[IOC]]) -> IOC:
+        route = self._api_route("/iocs")
+
+        if isinstance(iocs, IOC):
+            iocs = [iocs]
+        
+        for ioc in iocs:
+            params = {"uuid": ioc.uuid}
+            d = self._request("DELETE", route, params=params)
